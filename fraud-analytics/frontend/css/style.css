@@ -1,85 +1,111 @@
-/* Identidade visual */
+
+/* ========================================
+   FRAUD ANALYTICS | TECH GUIDE
+   Interface v0.3
+======================================== */
+
 :root {
-    --background: #f5f6f8;
+    --background: #f6f8fc;
     --surface: #ffffff;
-    --sidebar: #eceef1;
-    --text: #20242b;
-    --text-secondary: #667085;
+    --sidebar: #111827;
+    --text: #172033;
+    --text-secondary: #64748b;
     --primary: #2563eb;
-    --border: #e4e7ec;
+    --primary-light: #eff6ff;
+    --border: #e5eaf1;
+    --shadow: 0 4px 20px rgba(15, 23, 42, 0.035);
 }
 
-/* Configurações gerais */
 * {
     box-sizing: border-box;
 }
 
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    display: flex;
     background: var(--background);
     color: var(--text);
-    display: flex;
-    min-height: 100vh;
+    font-family: "Segoe UI", Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
 }
 
 /* Menu lateral */
+
 .sidebar {
-    width: 240px;
+    width: 248px;
+    flex-shrink: 0;
+    min-height: 100vh;
+    padding: 32px 18px;
     background: var(--sidebar);
-    padding: 32px 20px;
-    border-right: 1px solid var(--border);
+    color: #ffffff;
 }
 
 .sidebar h2 {
-    font-size: 18px;
-    margin: 0 0 40px;
+    margin: 0 0 44px;
+    padding: 0 12px;
+    font-size: 19px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
 }
 
 .sidebar nav {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 6px;
 }
 
 .sidebar nav a {
-    padding: 12px 14px;
-    color: var(--text-secondary);
+    display: block;
+    padding: 13px 14px;
+    border-radius: 9px;
+    color: #94a3b8;
     text-decoration: none;
-    border-radius: 8px;
-    font-size: 14px;
+    font-size: 13px;
+    font-weight: 500;
+    transition: background 0.2s, color 0.2s;
 }
 
 .sidebar nav a:hover {
-    background: #e0e4ea;
-    color: var(--text);
+    background: rgba(255, 255, 255, 0.07);
+    color: #ffffff;
 }
 
 .sidebar nav a.active {
-    background: var(--surface);
-    color: var(--primary);
+    background: #243653;
+    color: #ffffff;
     font-weight: 600;
 }
 
-/* Conteúdo */
+/* Área principal */
+
 .content {
     flex: 1;
     min-width: 0;
-    padding: 40px;
+    max-width: 1600px;
+    padding: 48px 48px 72px;
+}
+
+.page-header {
+    margin-bottom: 8px;
 }
 
 .page-header h1 {
-    font-size: 26px;
-    margin: 0 0 8px;
+    margin: 0 0 10px;
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: -0.8px;
 }
 
 .page-header p {
-    color: var(--text-secondary);
-    font-size: 14px;
     margin: 0;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text-secondary);
 }
 
 /* Indicadores */
+
 .overview {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -88,60 +114,58 @@ body {
 }
 
 .metric-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 24px;
+    position: relative;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 14px;
+    min-width: 0;
+    padding: 26px;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    background: var(--surface);
+    box-shadow: var(--shadow);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.metric-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.07);
+}
+
+.metric-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 24px;
+    right: 24px;
+    height: 3px;
+    border-radius: 0 0 4px 4px;
+    background: #cbd5e1;
+}
+
+.metric-card:nth-child(2)::before {
+    background: #2563eb;
+}
+
+.metric-card:nth-child(3)::before {
+    background: #0d9488;
 }
 
 .metric-card span {
     color: var(--text-secondary);
     font-size: 13px;
+    font-weight: 500;
 }
 
 .metric-card strong {
-    font-size: 28px;
-    font-weight: 600;
+    color: var(--text);
+    font-size: clamp(25px, 2.5vw, 34px);
+    font-weight: 700;
+    letter-spacing: -1px;
+    font-variant-numeric: tabular-nums;
 }
 
-/* Telas menores */
-@media (max-width: 900px) {
-    .sidebar {
-        width: 200px;
-    }
-
-    .content {
-        padding: 24px;
-    }
-
-    .overview {
-        grid-template-columns: 1fr;
-    }
-}
-
-@media (max-width: 600px) {
-    body {
-        flex-direction: column;
-    }
-
-    .sidebar {
-        width: 100%;
-        padding: 20px;
-    }
-
-    .sidebar h2 {
-        margin-bottom: 16px;
-    }
-
-    .content {
-        padding: 20px;
-    }
-}
-
-/* Área dos gráficos */
+/* Gráficos */
 
 .charts-grid {
     display: grid;
@@ -151,34 +175,116 @@ body {
 }
 
 .chart-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 24px;
     min-width: 0;
+    padding: 28px;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    background: var(--surface);
+    box-shadow: var(--shadow);
 }
 
 .chart-card h2 {
-    font-size: 17px;
     margin: 0 0 8px;
+    font-size: 17px;
+    font-weight: 650;
+    letter-spacing: -0.3px;
 }
 
 .chart-card p {
+    margin: 0 0 25px;
     color: var(--text-secondary);
     font-size: 13px;
-    margin: 0 0 24px;
+    line-height: 1.5;
 }
 
 .chart-container {
     position: relative;
     width: 100%;
-    height: 300px;
+    height: 310px;
 }
 
-/* Ajuste para telas menores */
+/* Responsividade */
 
-@media (max-width: 1000px) {
+@media (max-width: 1100px) {
+    .content {
+        padding: 32px;
+    }
+
     .charts-grid {
         grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 900px) {
+    .overview {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .sidebar {
+        width: 210px;
+    }
+}
+
+@media (max-width: 650px) {
+    body {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        min-height: auto;
+        padding: 18px;
+    }
+
+    .sidebar h2 {
+        margin-bottom: 18px;
+    }
+
+    .sidebar nav {
+        flex-direction: row;
+        overflow-x: auto;
+        padding-bottom: 5px;
+    }
+
+    .sidebar nav a {
+        flex-shrink: 0;
+        white-space: nowrap;
+    }
+
+    .content {
+        padding: 24px 16px 48px;
+    }
+
+    .page-header h1 {
+        font-size: 26px;
+    }
+
+    .overview {
+        grid-template-columns: 1fr;
+        gap: 14px;
+        margin-top: 24px;
+    }
+
+    .metric-card {
+        padding: 22px;
+    }
+
+    .chart-card {
+        padding: 20px;
+    }
+
+    .chart-container {
+        height: 280px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .metric-card,
+    .sidebar nav a {
+        transition: none;
+    }
+
+    .metric-card:hover {
+        transform: none;
     }
 }
