@@ -20,3 +20,11 @@ __pycache__/
 # Arquivos temporários do sistema
 .DS_Store
 Thumbs.db
+
+# Fraud Analytics - datasets locais
+fraud-analytics/data/raw/*.csv
+fraud-analytics/data/raw/*.zip
+fraud-analytics/data/processed/*.csv
+fraud-analytics/data/processed/*.db
+fraud-analytics/data/processed/*.sqlite
+fraud-analytics/data/processed/*.sqlite3
