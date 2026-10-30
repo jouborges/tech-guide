@@ -1,0 +1,50 @@
+
+# Fraud Analytics | Tech Guide
+# Publicação automática no GitHub Pages
+
+name: Deploy Fraud Analytics
+
+on:
+  push:
+    branches: ["main"]
+
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Publicar Dashboard
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Preparar arquivos do dashboard
+        run: |
+          test -f fraud-analytics/frontend/index.html
+          test -f fraud-analytics/frontend/data/indicadores.json
+
+      - name: Enviar arquivos para publicação
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./fraud-analytics/frontend
+
+      - name: Publicar no GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
