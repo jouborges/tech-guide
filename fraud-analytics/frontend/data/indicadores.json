@@ -1,0 +1,14 @@
+{
+    "total_transacoes": 284807,
+    "total_fraudes": 492,
+    "total_legitimas": 284315,
+    "taxa_fraude": 0.1727,
+    "valor_medio_legitimas": 88.29,
+    "valor_medio_fraudes": 122.21,
+    "mediana_legitimas": 22.0,
+    "mediana_fraudes": 9.25,
+    "percentual_baixo_valor": {
+        "legitimas": 35.18,
+        "fraudes": 50.61
+    }
+}

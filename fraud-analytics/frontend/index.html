@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -31,21 +32,42 @@
         <section class="overview">
             <article class="metric-card">
                 <span>Total de transações</span>
-                <strong>284.807</strong>
+                <strong id="total-transacoes">Carregando...</strong>
             </article>
 
             <article class="metric-card">
                 <span>Fraudes identificadas</span>
-                <strong>492</strong>
+                <strong id="total-fraudes">Carregando...</strong>
             </article>
 
             <article class="metric-card">
                 <span>Taxa de fraude</span>
-                <strong>0,17%</strong>
+                <strong id="taxa-fraude">Carregando...</strong>
             </article>
         </section>
+
+        <section class="charts-grid">
+    <article class="chart-card">
+        <h2>Distribuição das transações</h2>
+        <p>Comparação entre operações legítimas e fraudulentas.</p>
+        <div class="chart-container">
+            <canvas id="grafico-classes"></canvas>
+        </div>
+    </article>
+
+    <article class="chart-card">
+        <h2>Transações de baixo valor</h2>
+        <p>Percentual de operações com valor até 10.</p>
+        <div class="chart-container">
+            <canvas id="grafico-baixo-valor"></canvas>
+        </div>
+    </article>
+</section>
+
     </main>
 
-    <script src="js/app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.min.js"></script>
+<script src="js/app.js"></script>
+
 </body>
 </html>
