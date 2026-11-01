@@ -1,10 +1,13 @@
 
 "use strict";
 
-// Fraud Analytics | Tech Guide
-// Dashboard integrado aos indicadores gerados pelo Python.
+// ========================================
+// FRAUD ANALYTICS | TECH GUIDE
+// Dashboard de análise e Machine Learning
+// ========================================
 
-// Formatação dos valores
+// Formatação brasileira
+
 function formatarNumero(valor) {
     return valor.toLocaleString("pt-BR");
 }
@@ -16,7 +19,10 @@ function formatarPercentual(valor) {
     }) + "%";
 }
 
-// Criar gráficos analíticos
+// ========================================
+// GRÁFICOS DAS TRANSAÇÕES
+// ========================================
+
 function criarGraficos(dados) {
     if (typeof Chart === "undefined") {
         console.error("Chart.js não foi carregado.");
@@ -35,6 +41,7 @@ function criarGraficos(dados) {
     }
 
     // Gráfico 1: distribuição das transações
+
     new Chart(graficoClasses, {
         type: "doughnut",
         data: {
@@ -73,6 +80,7 @@ function criarGraficos(dados) {
     });
 
     // Gráfico 2: transações de baixo valor
+
     new Chart(graficoBaixoValor, {
         type: "bar",
         data: {
@@ -124,10 +132,15 @@ function criarGraficos(dados) {
         }
     });
 
-    console.info("Fraud Analytics: gráficos criados.");
+    console.info(
+        "Fraud Analytics: gráficos carregados com sucesso."
+    );
 }
 
-// Carregar indicadores do JSON
+// ========================================
+// INDICADORES GERAIS
+// ========================================
+
 async function carregarIndicadores() {
     const indicadores = [
         "total-transacoes",
@@ -149,7 +162,6 @@ async function carregarIndicadores() {
 
         const dados = await resposta.json();
 
-        // Validar os dados recebidos
         const camposObrigatorios = [
             "total_transacoes",
             "total_fraudes",
@@ -162,10 +174,7 @@ async function carregarIndicadores() {
         ];
 
         for (const campo of camposObrigatorios) {
-            if (
-                typeof dados[campo] !== "number" ||
-                !Number.isFinite(dados[campo])
-            ) {
+            if (!Number.isFinite(dados[campo])) {
                 throw new Error(
                     `Indicador inválido ou ausente: ${campo}`
                 );
@@ -186,7 +195,8 @@ async function carregarIndicadores() {
             );
         }
 
-        // Atualizar os indicadores do dashboard
+        // Atualizar indicadores principais
+
         document.getElementById(
             "total-transacoes"
         ).textContent = formatarNumero(
@@ -205,7 +215,8 @@ async function carregarIndicadores() {
             dados.taxa_fraude
         );
 
-        // Criar os gráficos após carregar os dados
+        // Criar gráficos com os dados carregados
+
         criarGraficos(dados);
 
         console.info(
@@ -228,7 +239,95 @@ async function carregarIndicadores() {
     }
 }
 
-// Inicialização da interface
+// ========================================
+// DESEMPENHO DO MODELO DE MACHINE LEARNING
+// ========================================
+
+async function carregarModelo() {
+    const campos = {
+        "modelo-precisao": "precisao",
+        "modelo-recall": "recall",
+        "modelo-f1": "f1_score",
+        "modelo-vp": "verdadeiros_positivos",
+        "modelo-fp": "falsos_positivos",
+        "modelo-fn": "falsos_negativos",
+        "modelo-vn": "verdadeiros_negativos"
+    };
+
+    try {
+        const resposta = await fetch(
+            "./data/modelo_v2.json",
+            { cache: "no-store" }
+        );
+
+        if (!resposta.ok) {
+            throw new Error(
+                `Erro HTTP ${resposta.status} ao carregar o modelo.`
+            );
+        }
+
+        const dados = await resposta.json();
+
+        // Validar todos os campos antes de atualizar a tela
+
+        for (const campo of Object.values(campos)) {
+            if (!Number.isFinite(dados[campo])) {
+                throw new Error(
+                    `Resultado do modelo inválido: ${campo}`
+                );
+            }
+        }
+
+        // Atualizar métricas e resultados
+
+        for (const [id, campo] of Object.entries(campos)) {
+            const elemento = document.getElementById(id);
+
+            if (!elemento) {
+                console.warn(
+                    `Elemento não encontrado: ${id}`
+                );
+                continue;
+            }
+
+            const valor = dados[campo];
+
+            const percentual = [
+                "precisao",
+                "recall",
+                "f1_score"
+            ].includes(campo);
+
+            elemento.textContent = percentual
+                ? formatarPercentual(valor * 100)
+                : formatarNumero(valor);
+        }
+
+        console.info(
+            "Fraud Analytics: resultados do modelo carregados."
+        );
+
+    } catch (erro) {
+        console.error(
+            "Fraud Analytics: falha ao carregar o modelo.",
+            erro
+        );
+
+        for (const id of Object.keys(campos)) {
+            const elemento = document.getElementById(id);
+
+            if (elemento) {
+                elemento.textContent = "Indisponível";
+            }
+        }
+    }
+}
+
+// ========================================
+// INICIALIZAÇÃO DO DASHBOARD
+// ========================================
+
 document.addEventListener("DOMContentLoaded", () => {
     carregarIndicadores();
+    carregarModelo();
 });

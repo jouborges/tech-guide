@@ -288,3 +288,117 @@ body {
         transform: none;
     }
 }
+
+/* ========================================
+   DESEMPENHO DO MODELO | MACHINE LEARNING
+======================================== */
+
+.model-section {
+    margin-top: 48px;
+    scroll-margin-top: 24px;
+}
+
+.model-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 24px;
+}
+
+.model-header h2 {
+    margin: 0 0 8px;
+    font-size: 23px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.model-header p {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.model-badge {
+    flex-shrink: 0;
+    padding: 8px 13px;
+    border-radius: 999px;
+    background: #eff6ff;
+    color: #1d4ed8;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.model-metrics {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.model-details {
+    margin-top: 24px;
+}
+
+.model-results {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.model-results > div {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 20px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--background);
+}
+
+.model-results span {
+    color: var(--text-secondary);
+    font-size: 13px;
+}
+
+.model-results strong {
+    color: var(--text);
+    font-size: 25px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+
+.model-disclaimer {
+    margin-top: 20px;
+    padding: 16px 20px;
+    border-left: 3px solid #94a3b8;
+    border-radius: 6px;
+    background: #eef2f7;
+    color: #475569;
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+/* Responsividade da seção ML */
+
+@media (max-width: 900px) {
+    .model-metrics {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 650px) {
+    .model-section {
+        margin-top: 36px;
+    }
+
+    .model-header {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .model-results {
+        grid-template-columns: 1fr;
+    }
+}

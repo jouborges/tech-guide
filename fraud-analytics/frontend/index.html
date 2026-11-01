@@ -18,17 +18,22 @@
             <a href="#" class="active">Visão geral</a>
             <a href="#">Transações</a>
             <a href="#">Análise de risco</a>
-            <a href="#">Desempenho</a>
+            <a href="#desempenho">Desempenho</a>
             <a href="#">Qualidade dos dados</a>
         </nav>
     </aside>
 
     <main class="content">
+
         <header class="page-header">
             <h1>Visão geral</h1>
-            <p>Análise de transações financeiras e indicadores de fraude.</p>
+            <p>
+                Análise de transações financeiras
+                e indicadores de fraude.
+            </p>
         </header>
 
+        <!-- Indicadores gerais -->
         <section class="overview">
             <article class="metric-card">
                 <span>Total de transações</span>
@@ -46,28 +51,109 @@
             </article>
         </section>
 
+        <!-- Gráficos das transações -->
         <section class="charts-grid">
-    <article class="chart-card">
-        <h2>Distribuição das transações</h2>
-        <p>Comparação entre operações legítimas e fraudulentas.</p>
-        <div class="chart-container">
-            <canvas id="grafico-classes"></canvas>
-        </div>
-    </article>
+            <article class="chart-card">
+                <h2>Distribuição das transações</h2>
+                <p>
+                    Comparação entre operações
+                    legítimas e fraudulentas.
+                </p>
+                <div class="chart-container">
+                    <canvas id="grafico-classes"></canvas>
+                </div>
+            </article>
 
-    <article class="chart-card">
-        <h2>Transações de baixo valor</h2>
-        <p>Percentual de operações com valor até 10.</p>
-        <div class="chart-container">
-            <canvas id="grafico-baixo-valor"></canvas>
-        </div>
-    </article>
-</section>
+            <article class="chart-card">
+                <h2>Transações de baixo valor</h2>
+                <p>
+                    Percentual de operações
+                    com valor até 10.
+                </p>
+                <div class="chart-container">
+                    <canvas id="grafico-baixo-valor"></canvas>
+                </div>
+            </article>
+        </section>
+
+        <!-- Resultados experimentais de Machine Learning -->
+        <section id="desempenho" class="model-section">
+
+            <header class="model-header">
+                <div>
+                    <h2>Desempenho do modelo</h2>
+                    <p>
+                        Regressão Logística v2 |
+                        Avaliação experimental de classificação.
+                    </p>
+                </div>
+                <span class="model-badge">Experimental</span>
+            </header>
+
+            <div class="model-metrics">
+
+                <article class="metric-card">
+                    <span>Precisão</span>
+                    <strong id="modelo-precisao">Carregando...</strong>
+                </article>
+
+                <article class="metric-card">
+                    <span>Recall</span>
+                    <strong id="modelo-recall">Carregando...</strong>
+                </article>
+
+                <article class="metric-card">
+                    <span>F1-score</span>
+                    <strong id="modelo-f1">Carregando...</strong>
+                </article>
+
+            </div>
+
+            <div class="model-details">
+                <article class="chart-card">
+                    <h2>Resultados da classificação</h2>
+                    <p>
+                        Quantidade de acertos e erros
+                        no conjunto de teste.
+                    </p>
+
+                    <div class="model-results">
+                        <div>
+                            <span>Fraudes identificadas</span>
+                            <strong id="modelo-vp">Carregando...</strong>
+                        </div>
+
+                        <div>
+                            <span>Falsos alertas</span>
+                            <strong id="modelo-fp">Carregando...</strong>
+                        </div>
+
+                        <div>
+                            <span>Fraudes não detectadas</span>
+                            <strong id="modelo-fn">Carregando...</strong>
+                        </div>
+
+                        <div>
+                            <span>Legítimas corretamente classificadas</span>
+                            <strong id="modelo-vn">Carregando...</strong>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <p class="model-disclaimer">
+                Resultados de um experimento exploratório.
+                O conjunto de teste já foi utilizado em análises
+                anteriores. As métricas não representam desempenho
+                validado em produção.
+            </p>
+
+        </section>
 
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.min.js"></script>
-<script src="js/app.js"></script>
+    <script src="js/app.js"></script>
 
 </body>
 </html>
