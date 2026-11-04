@@ -8,6 +8,7 @@
     <title>Fraud Analytics | Tech Guide</title>
 
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/experimentos.css">
 </head>
 <body>
 
@@ -19,6 +20,7 @@
             <a href="#">Transações</a>
             <a href="#">Análise de risco</a>
             <a href="#desempenho">Desempenho</a>
+            <a href="#experimentos">Experimentos ML</a>
             <a href="#">Qualidade dos dados</a>
         </nav>
     </aside>
@@ -150,10 +152,53 @@
 
         </section>
 
+
+        <!-- EXPERIMENTOS ML | BLOCO ISOLADO -->
+        <section id="experimentos" class="ex-section" aria-labelledby="ex-titulo">
+            <header class="model-header">
+                <div><h2 id="ex-titulo">Laboratório de modelos</h2>
+                <p>Comparação na mesma validação (56.962 transações, 99 fraudes). Resultados experimentais.</p></div>
+                <span class="model-badge">Validação exploratória</span>
+            </header>
+            <p id="ex-estado" class="ex-status" role="status">Carregando resultados dos experimentos...</p>
+            <div id="ex-conteudo" hidden>
+                <div class="ex-grid">
+                    <article class="chart-card"><h2>Comparativo de desempenho</h2>
+                        <p>Precision, Recall, F1 e Average Precision. Os limiares dos modelos são diferentes.</p>
+                        <div class="chart-container"><canvas id="ex-grafico-modelos" aria-label="Comparação das métricas dos modelos"></canvas></div>
+                    </article>
+                    <article class="chart-card"><h2>Alertas e fraudes não detectadas</h2>
+                        <p>Contagem de falsos positivos e falsos negativos na mesma validação.</p>
+                        <div class="chart-container"><canvas id="ex-grafico-erros" aria-label="Comparativo de falsos positivos e negativos"></canvas></div>
+                    </article>
+                </div>
+                <article class="chart-card ex-spaced">
+                    <div class="ex-threshold-heading"><div><h2>Limiar do Random Forest</h2>
+                    <p>Selecione um limiar efetivamente testado; os resultados não são simulados.</p></div>
+                    <label class="ex-select-label" for="ex-limiar">Limiar <select id="ex-limiar" aria-label="Selecionar limiar do Random Forest"></select></label></div>
+                    <div class="ex-kpis" id="ex-kpis" aria-live="polite"></div>
+                    <div class="chart-container ex-threshold-chart"><canvas id="ex-grafico-limiares" aria-label="Precision, Recall e F1 por limiar"></canvas></div>
+                </article>
+                <div class="ex-grid ex-spaced">
+                    <article class="chart-card"><h2>Importância nas árvores</h2>
+                        <p>Top 10 por redução de impureza. Importância relativa, não causal.</p>
+                        <div class="chart-container ex-tall"><canvas id="ex-grafico-importancia" aria-label="Variáveis mais importantes nas árvores"></canvas></div>
+                    </article>
+                    <article class="chart-card"><h2>Importância por permutação</h2>
+                        <p>Queda média de AP (pontos percentuais), com duas permutações por variável.</p>
+                        <div class="chart-container ex-tall"><canvas id="ex-grafico-permutacao" aria-label="Importância por permutação"></canvas></div>
+                    </article>
+                </div>
+                <p class="model-disclaimer">Os modelos foram avaliados em dados de validação; o gráfico acima não substitui o resultado anterior da Regressão Logística no conjunto de teste. O limiar 0,95 da Regressão Logística foi selecionado usando a validação. A análise por permutação cobre apenas 10 variáveis e não determina causalidade ou significado das componentes PCA.</p>
+            </div>
+        </section>
+        <!-- FIM EXPERIMENTOS ML -->
+
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.min.js"></script>
     <script src="js/app.js"></script>
+    <script src="js/experimentos.js"></script>
 
 </body>
 </html>

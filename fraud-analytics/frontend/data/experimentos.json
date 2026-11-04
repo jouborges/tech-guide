@@ -1,0 +1,288 @@
+{
+  "amostra": "Validação estratificada",
+  "registros_validacao": 56962,
+  "fraudes_validacao": 99,
+  "modelos": [
+    {
+      "modelo": "Regressão Logística V2",
+      "Limiar": 0.95,
+      "Precision": 0.28368794326241137,
+      "Recall": 0.8080808080808081,
+      "F1": 0.4199475065616798,
+      "AP": 0.6807113141715643,
+      "TP": 80.0,
+      "FP": 202.0,
+      "FN": 19.0,
+      "TN": 56661.0
+    },
+    {
+      "modelo": "Random Forest",
+      "Limiar": 0.5,
+      "Precision": 0.9240506329113924,
+      "Recall": 0.7373737373737373,
+      "F1": 0.8202247191011236,
+      "AP": 0.8006164554143932,
+      "TP": 73.0,
+      "FP": 6.0,
+      "FN": 26.0,
+      "TN": 56857.0
+    }
+  ],
+  "limiares_rf": [
+    {
+      "Limiar": 0.1,
+      "Precision": 0.7788461538461539,
+      "Recall": 0.8181818181818182,
+      "F1": 0.7980295566502463,
+      "TP": 81.0,
+      "FP": 23.0,
+      "FN": 18.0,
+      "TN": 56840.0
+    },
+    {
+      "Limiar": 0.2,
+      "Precision": 0.8144329896907216,
+      "Recall": 0.797979797979798,
+      "F1": 0.8061224489795918,
+      "TP": 79.0,
+      "FP": 18.0,
+      "FN": 20.0,
+      "TN": 56845.0
+    },
+    {
+      "Limiar": 0.3,
+      "Precision": 0.8555555555555555,
+      "Recall": 0.7777777777777778,
+      "F1": 0.8148148148148148,
+      "TP": 77.0,
+      "FP": 13.0,
+      "FN": 22.0,
+      "TN": 56850.0
+    },
+    {
+      "Limiar": 0.4,
+      "Precision": 0.8902439024390244,
+      "Recall": 0.7373737373737373,
+      "F1": 0.8066298342541437,
+      "TP": 73.0,
+      "FP": 9.0,
+      "FN": 26.0,
+      "TN": 56854.0
+    },
+    {
+      "Limiar": 0.5,
+      "Precision": 0.9240506329113924,
+      "Recall": 0.7373737373737373,
+      "F1": 0.8202247191011236,
+      "TP": 73.0,
+      "FP": 6.0,
+      "FN": 26.0,
+      "TN": 56857.0
+    },
+    {
+      "Limiar": 0.6,
+      "Precision": 0.9705882352941176,
+      "Recall": 0.6666666666666666,
+      "F1": 0.7904191616766467,
+      "TP": 66.0,
+      "FP": 2.0,
+      "FN": 33.0,
+      "TN": 56861.0
+    },
+    {
+      "Limiar": 0.7,
+      "Precision": 0.9692307692307692,
+      "Recall": 0.6363636363636364,
+      "F1": 0.7682926829268293,
+      "TP": 63.0,
+      "FP": 2.0,
+      "FN": 36.0,
+      "TN": 56861.0
+    },
+    {
+      "Limiar": 0.8,
+      "Precision": 0.9642857142857143,
+      "Recall": 0.5454545454545454,
+      "F1": 0.6967741935483871,
+      "TP": 54.0,
+      "FP": 2.0,
+      "FN": 45.0,
+      "TN": 56861.0
+    },
+    {
+      "Limiar": 0.9,
+      "Precision": 0.972972972972973,
+      "Recall": 0.36363636363636365,
+      "F1": 0.5294117647058824,
+      "TP": 36.0,
+      "FP": 1.0,
+      "FN": 63.0,
+      "TN": 56862.0
+    }
+  ],
+  "importancia_arvores": [
+    {
+      "variavel": "V17",
+      "importancia": 0.16311746237919292
+    },
+    {
+      "variavel": "V12",
+      "importancia": 0.13159321767460955
+    },
+    {
+      "variavel": "V14",
+      "importancia": 0.12566644722564926
+    },
+    {
+      "variavel": "V16",
+      "importancia": 0.08518885140570624
+    },
+    {
+      "variavel": "V10",
+      "importancia": 0.08249021674612012
+    },
+    {
+      "variavel": "V11",
+      "importancia": 0.04465559297864339
+    },
+    {
+      "variavel": "V18",
+      "importancia": 0.035276158835297326
+    },
+    {
+      "variavel": "V9",
+      "importancia": 0.03313054748858506
+    },
+    {
+      "variavel": "V4",
+      "importancia": 0.029131350599433992
+    },
+    {
+      "variavel": "V7",
+      "importancia": 0.02174683200935311
+    },
+    {
+      "variavel": "V3",
+      "importancia": 0.019237749276915794
+    },
+    {
+      "variavel": "V21",
+      "importancia": 0.019062277908194834
+    },
+    {
+      "variavel": "V26",
+      "importancia": 0.018153808365486503
+    },
+    {
+      "variavel": "V2",
+      "importancia": 0.017529593411251362
+    },
+    {
+      "variavel": "V8",
+      "importancia": 0.014654629995452553
+    },
+    {
+      "variavel": "V19",
+      "importancia": 0.014186085585694936
+    },
+    {
+      "variavel": "V1",
+      "importancia": 0.013848399100399969
+    },
+    {
+      "variavel": "V20",
+      "importancia": 0.013144634689133907
+    },
+    {
+      "variavel": "V13",
+      "importancia": 0.01249816960842332
+    },
+    {
+      "variavel": "V27",
+      "importancia": 0.011939979632119437
+    },
+    {
+      "variavel": "V15",
+      "importancia": 0.011756930636830152
+    },
+    {
+      "variavel": "V6",
+      "importancia": 0.011623477669280012
+    },
+    {
+      "variavel": "V5",
+      "importancia": 0.01117262524115151
+    },
+    {
+      "variavel": "Time",
+      "importancia": 0.01062880521200479
+    },
+    {
+      "variavel": "V22",
+      "importancia": 0.010194969066658642
+    },
+    {
+      "variavel": "V28",
+      "importancia": 0.009674914757699238
+    },
+    {
+      "variavel": "Amount",
+      "importancia": 0.008409544938722315
+    },
+    {
+      "variavel": "V25",
+      "importancia": 0.007586407518469139
+    },
+    {
+      "variavel": "V23",
+      "importancia": 0.00668879462728551
+    },
+    {
+      "variavel": "V24",
+      "importancia": 0.006011525416235182
+    }
+  ],
+  "importancia_permutacao": [
+    {
+      "variavel": "V14",
+      "queda_ap": 0.06413789128848818
+    },
+    {
+      "variavel": "V17",
+      "queda_ap": 0.048955345438247144
+    },
+    {
+      "variavel": "V12",
+      "queda_ap": 0.017733495751876993
+    },
+    {
+      "variavel": "V10",
+      "queda_ap": 0.011221808401456534
+    },
+    {
+      "variavel": "V4",
+      "queda_ap": 0.00980464331610953
+    },
+    {
+      "variavel": "V16",
+      "queda_ap": 0.008175842957963253
+    },
+    {
+      "variavel": "V18",
+      "queda_ap": 0.00561999319396872
+    },
+    {
+      "variavel": "V9",
+      "queda_ap": 0.005106626352803678
+    },
+    {
+      "variavel": "V11",
+      "queda_ap": 0.004504808172521635
+    },
+    {
+      "variavel": "V7",
+      "queda_ap": -0.0033750551395398953
+    }
+  ],
+  "observacao": "Experimento exploratório; não é validação independente para produção."
+}
