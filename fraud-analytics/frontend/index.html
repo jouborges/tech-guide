@@ -4,96 +4,387 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Fraud Analytics | Tech Guide</title>
 
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/experimentos.css">
+
+    <style>
+        .fa-page[hidden] {
+            display: none !important;
+        }
+
+        .fa-page {
+            animation: fa-entrar .22s ease-out;
+        }
+
+        @keyframes fa-entrar {
+            from { opacity: .4; transform: translateY(7px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fa-intro {
+            color: #64748b;
+            line-height: 1.7;
+            font-size: 14px;
+            max-width: 850px;
+        }
+
+        .fa-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+            margin: 26px 0;
+        }
+
+        .fa-card {
+            background: white;
+            border: 1px solid #e5eaf1;
+            border-radius: 16px;
+            padding: 24px;
+        }
+
+        .fa-card small {
+            display: block;
+            color: #64748b;
+            font-size: 13px;
+            margin-bottom: 12px;
+        }
+
+        .fa-card strong {
+            display: block;
+            font-size: clamp(23px, 2.4vw, 32px);
+            color: #172033;
+            overflow-wrap: anywhere;
+        }
+
+        .fa-card p {
+            color: #64748b;
+            font-size: 13px;
+            line-height: 1.7;
+            margin: 12px 0 0;
+        }
+
+        .fa-panel {
+            background: white;
+            border: 1px solid #e5eaf1;
+            border-radius: 16px;
+            padding: 26px;
+            margin-top: 20px;
+        }
+
+        .fa-panel h2 {
+            margin-top: 0;
+            font-size: 20px;
+        }
+
+        .fa-panel p, .fa-panel li {
+            font-size: 14px;
+            line-height: 1.8;
+            color: #52627a;
+        }
+
+        .fa-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        .fa-table th, .fa-table td {
+            text-align: left;
+            padding: 15px;
+            border-bottom: 1px solid #e5eaf1;
+        }
+
+        .fa-table th {
+            color: #64748b;
+            font-size: 12px;
+        }
+
+        .fa-note {
+            border-left: 4px solid #2563eb;
+            background: #eff6ff;
+            padding: 16px 20px;
+            border-radius: 8px;
+            color: #334155;
+            line-height: 1.7;
+            margin-top: 22px;
+            font-size: 13px;
+        }
+
+        .fa-button {
+            display: inline-block;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 14px;
+            margin-top: 12px;
+        }
+
+        .fa-button:hover {
+            background: #1d4ed8;
+        }
+
+        .fa-status {
+            font-weight: 600;
+            color: #0f766e;
+        }
+
+        .fa-status-warning {
+            color: #b45309;
+        }
+
+        .fa-scroll {
+            overflow-x: auto;
+        }
+
+        @media (max-width: 1000px) {
+            .fa-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 650px) {
+            .fa-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .fa-panel {
+                padding: 18px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .fa-page {
+                animation: none;
+            }
+        }
+    </style>
 </head>
+
 <body>
 
     <aside class="sidebar">
         <h2>Fraud Analytics</h2>
 
-        <nav>
-            <a href="#" class="active">Visão geral</a>
-            <a href="#">Transações</a>
-            <a href="#">Análise de risco</a>
-            <a href="#desempenho">Desempenho</a>
-            <a href="#experimentos">Experimentos ML</a>
-            <a href="#">Qualidade dos dados</a>
+        <nav aria-label="Navegação principal">
+            <a href="#visao-geral" class="active" data-page="visao-geral">Visão geral</a>
+            <a href="#transacoes" data-page="transacoes">Transações</a>
+            <a href="#analise-risco" data-page="analise-risco">Análise de risco</a>
+            <a href="#desempenho" data-page="desempenho">Desempenho</a>
+            <a href="#experimentos" data-page="experimentos">Experimentos ML</a>
+            <a href="#qualidade-dados" data-page="qualidade-dados">Qualidade dos dados</a>
         </nav>
     </aside>
 
     <main class="content">
 
-        <header class="page-header">
-            <h1>Visão geral</h1>
-            <p>
-                Análise de transações financeiras
-                e indicadores de fraude.
-            </p>
-        </header>
+        <!-- 1. VISAO GERAL -->
+        <section id="visao-geral" class="fa-page">
+            <header class="page-header">
+                <h1>Visão geral</h1>
+                <p>
+                    Análise exploratória de transações financeiras,
+                    indicadores de fraude e experimentos de Machine Learning.
+                </p>
+            </header>
 
-        <!-- Indicadores gerais -->
-        <section class="overview">
-            <article class="metric-card">
-                <span>Total de transações</span>
-                <strong id="total-transacoes">Carregando...</strong>
-            </article>
+            <div class="overview">
+                <article class="metric-card">
+                    <span>Total de transações</span>
+                    <strong id="total-transacoes">Carregando...</strong>
+                </article>
 
-            <article class="metric-card">
-                <span>Fraudes identificadas</span>
-                <strong id="total-fraudes">Carregando...</strong>
-            </article>
+                <article class="metric-card">
+                    <span>Fraudes na base</span>
+                    <strong id="total-fraudes">Carregando...</strong>
+                </article>
 
-            <article class="metric-card">
-                <span>Taxa de fraude</span>
-                <strong id="taxa-fraude">Carregando...</strong>
-            </article>
+                <article class="metric-card">
+                    <span>Taxa de fraude</span>
+                    <strong id="taxa-fraude">Carregando...</strong>
+                </article>
+            </div>
+
+            <div class="charts-grid">
+                <article class="chart-card">
+                    <h2>Distribuição das transações</h2>
+                    <p>Comparação entre transações legítimas e fraudulentas.</p>
+                    <div class="chart-container">
+                        <canvas id="grafico-classes"></canvas>
+                    </div>
+                </article>
+
+                <article class="chart-card">
+                    <h2>Transações de baixo valor</h2>
+                    <p>Percentual de operações com valor até 10 em cada classe.</p>
+                    <div class="chart-container">
+                        <canvas id="grafico-baixo-valor"></canvas>
+                    </div>
+                </article>
+            </div>
+
+            <div class="fa-note">
+                Os indicadores representam a composição do dataset.
+                Fraudes na base são registros classificados como fraudulentos,
+                não necessariamente fraudes detectadas pelos modelos.
+            </div>
         </section>
 
-        <!-- Gráficos das transações -->
-        <section class="charts-grid">
-            <article class="chart-card">
-                <h2>Distribuição das transações</h2>
+        <!-- 2. TRANSACOES -->
+        <section id="transacoes" class="fa-page" hidden>
+            <header class="page-header">
+                <h1>Transações</h1>
+                <p>Distribuição de valores e características das operações analisadas.</p>
+            </header>
+
+            <div class="fa-grid">
+                <article class="fa-card">
+                    <small>Transações legítimas</small>
+                    <strong id="tx-legitimas">Carregando...</strong>
+                    <p>Registros com classificação original igual a zero.</p>
+                </article>
+
+                <article class="fa-card">
+                    <small>Valor médio das legítimas</small>
+                    <strong id="tx-media-legitimas">Carregando...</strong>
+                    <p>Valor médio informado no dataset.</p>
+                </article>
+
+                <article class="fa-card">
+                    <small>Valor médio das fraudes</small>
+                    <strong id="tx-media-fraudes">Carregando...</strong>
+                    <p>Valor médio das transações fraudulentas.</p>
+                </article>
+            </div>
+
+            <article class="fa-panel">
+                <h2>Comparação das distribuições</h2>
                 <p>
-                    Comparação entre operações
-                    legítimas e fraudulentas.
+                    A média e a mediana ajudam a investigar diferenças
+                    entre as duas classes de transações.
                 </p>
-                <div class="chart-container">
-                    <canvas id="grafico-classes"></canvas>
+
+                <div class="fa-scroll">
+                    <table class="fa-table">
+                        <thead>
+                            <tr>
+                                <th>Indicador</th>
+                                <th>Legítimas</th>
+                                <th>Fraudulentas</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Valor médio</td>
+                                <td id="tx-tabela-media-legitimas">—</td>
+                                <td id="tx-tabela-media-fraudes">—</td>
+                            </tr>
+                            <tr>
+                                <td>Mediana</td>
+                                <td id="tx-mediana-legitimas">—</td>
+                                <td id="tx-mediana-fraudes">—</td>
+                            </tr>
+                            <tr>
+                                <td>Percentual de valor até 10</td>
+                                <td id="tx-baixo-legitimas">—</td>
+                                <td id="tx-baixo-fraudes">—</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </article>
 
-            <article class="chart-card">
-                <h2>Transações de baixo valor</h2>
-                <p>
-                    Percentual de operações
-                    com valor até 10.
-                </p>
-                <div class="chart-container">
-                    <canvas id="grafico-baixo-valor"></canvas>
-                </div>
-            </article>
+            <div class="fa-note">
+                A mediana pode representar melhor o valor típico quando existem
+                transações muito elevadas. Diferenças estatísticas entre classes
+                não comprovam, isoladamente, comportamento fraudulento.
+                Os valores monetários seguem a unidade da base original.
+            </div>
         </section>
 
-        <!-- Resultados experimentais de Machine Learning -->
-        <section id="desempenho" class="model-section">
+        <!-- 3. ANALISE DE RISCO -->
+        <section id="analise-risco" class="fa-page" hidden>
+            <header class="page-header">
+                <h1>Análise de risco</h1>
+                <p>Indicadores exploratórios para investigar características associadas às fraudes.</p>
+            </header>
 
-            <header class="model-header">
+            <div class="fa-grid">
+                <article class="fa-card">
+                    <small>Fraudes de valor até 10</small>
+                    <strong id="risco-baixo-fraudes">Carregando...</strong>
+                    <p>Proporção de transações fraudulentas nessa faixa.</p>
+                </article>
+
+                <article class="fa-card">
+                    <small>Legítimas de valor até 10</small>
+                    <strong id="risco-baixo-legitimas">Carregando...</strong>
+                    <p>Proporção de transações legítimas na mesma faixa.</p>
+                </article>
+
+                <article class="fa-card">
+                    <small>Diferença entre proporções</small>
+                    <strong id="risco-diferenca">Carregando...</strong>
+                    <p>Diferença em pontos percentuais, fraudes menos legítimas.</p>
+                </article>
+            </div>
+
+            <article class="fa-panel">
+                <h2>Como interpretar este indicador?</h2>
+                <p>
+                    Uma parcela relevante das fraudes está concentrada em
+                    transações de baixo valor. Porém, muitas operações legítimas
+                    também pertencem a essa faixa.
+                </p>
+                <p>
+                    Portanto, o valor da transação pode ser uma informação útil
+                    na análise, mas não deve ser tratado como uma regra
+                    suficiente para classificar uma operação como fraude.
+                </p>
+            </article>
+
+            <article class="fa-panel">
+                <h2>Da análise ao modelo preditivo</h2>
+                <p>
+                    Os modelos consideram múltiplas características das
+                    transações, não apenas seus valores. O objetivo é identificar
+                    combinações de padrões que ajudem na classificação.
+                </p>
+
+                <a class="fa-button" href="#experimentos" data-go="experimentos">
+                    Explorar modelos de Machine Learning
+                </a>
+            </article>
+
+            <div class="fa-note">
+                Esta seção apresenta associações descritivas.
+                Não há classificação individual nem monitoramento
+                de transações em tempo real.
+            </div>
+        </section>
+
+        <!-- 4. DESEMPENHO -->
+        <section id="desempenho" class="fa-page model-section" hidden>
+            <header class="page-header">
+                <h1>Desempenho</h1>
+                <p>Avaliação experimental de modelos de detecção de fraudes.</p>
+            </header>
+
+            <header class="model-header" style="margin-top:28px">
                 <div>
-                    <h2>Desempenho do modelo</h2>
+                    <h2>Regressão Logística V2</h2>
                     <p>
-                        Regressão Logística v2 |
-                        Avaliação experimental de classificação.
+                        Resultados do experimento anterior no conjunto de teste.
                     </p>
                 </div>
                 <span class="model-badge">Experimental</span>
             </header>
 
             <div class="model-metrics">
-
                 <article class="metric-card">
                     <span>Precisão</span>
                     <strong id="modelo-precisao">Carregando...</strong>
@@ -108,15 +399,14 @@
                     <span>F1-score</span>
                     <strong id="modelo-f1">Carregando...</strong>
                 </article>
-
             </div>
 
             <div class="model-details">
                 <article class="chart-card">
                     <h2>Resultados da classificação</h2>
                     <p>
-                        Quantidade de acertos e erros
-                        no conjunto de teste.
+                        Acertos e erros registrados no conjunto de teste
+                        desse experimento.
                     </p>
 
                     <div class="model-results">
@@ -145,60 +435,412 @@
 
             <p class="model-disclaimer">
                 Resultados de um experimento exploratório.
-                O conjunto de teste já foi utilizado em análises
-                anteriores. As métricas não representam desempenho
-                validado em produção.
+                O conjunto de teste já foi utilizado em análises anteriores.
+                Essas métricas não representam desempenho validado em produção
+                e não devem ser comparadas diretamente com resultados de
+                validação apresentados em outros experimentos.
             </p>
-
         </section>
 
+        <!-- 5. EXPERIMENTOS ML -->
+        <section id="experimentos" class="fa-page ex-section" hidden
+                 aria-labelledby="ex-titulo">
 
-        <!-- EXPERIMENTOS ML | BLOCO ISOLADO -->
-        <section id="experimentos" class="ex-section" aria-labelledby="ex-titulo">
-            <header class="model-header">
-                <div><h2 id="ex-titulo">Laboratório de modelos</h2>
-                <p>Comparação na mesma validação (56.962 transações, 99 fraudes). Resultados experimentais.</p></div>
+            <header class="page-header">
+                <h1>Experimentos ML</h1>
+                <p>
+                    Comparação de algoritmos, limiares de decisão
+                    e importância das variáveis.
+                </p>
+            </header>
+
+            <article class="fa-panel">
+                <h2>Laboratório de Decisões</h2>
+                <p>
+                    Simule cenários operacionais, compare limiares
+                    de classificação e avalie custos hipotéticos
+                    de falsos alertas e fraudes não detectadas.
+                </p>
+
+                <a class="fa-button" href="laboratorio-decisoes.html">
+                    Abrir Laboratório de Decisões
+                </a>
+            </article>
+
+            <header class="model-header" style="margin-top:32px">
+                <div>
+                    <h2 id="ex-titulo">Laboratório de modelos</h2>
+                    <p>
+                        Comparação na mesma validação:
+                        56.962 transações e 99 fraudes.
+                    </p>
+                </div>
+
                 <span class="model-badge">Validação exploratória</span>
             </header>
-            <p id="ex-estado" class="ex-status" role="status">Carregando resultados dos experimentos...</p>
+
+            <p id="ex-estado" class="ex-status" role="status">
+                Carregando resultados dos experimentos...
+            </p>
+
             <div id="ex-conteudo" hidden>
+
                 <div class="ex-grid">
-                    <article class="chart-card"><h2>Comparativo de desempenho</h2>
-                        <p>Precision, Recall, F1 e Average Precision. Os limiares dos modelos são diferentes.</p>
-                        <div class="chart-container"><canvas id="ex-grafico-modelos" aria-label="Comparação das métricas dos modelos"></canvas></div>
+                    <article class="chart-card">
+                        <h2>Comparativo de desempenho</h2>
+                        <p>
+                            Precision, Recall, F1 e Average Precision.
+                            Os limiares dos modelos são diferentes.
+                        </p>
+
+                        <div class="chart-container">
+                            <canvas id="ex-grafico-modelos"
+                                    aria-label="Comparação das métricas dos modelos"></canvas>
+                        </div>
                     </article>
-                    <article class="chart-card"><h2>Alertas e fraudes não detectadas</h2>
-                        <p>Contagem de falsos positivos e falsos negativos na mesma validação.</p>
-                        <div class="chart-container"><canvas id="ex-grafico-erros" aria-label="Comparativo de falsos positivos e negativos"></canvas></div>
+
+                    <article class="chart-card">
+                        <h2>Alertas e fraudes não detectadas</h2>
+                        <p>
+                            Falsos positivos e falsos negativos
+                            na mesma validação.
+                        </p>
+
+                        <div class="chart-container">
+                            <canvas id="ex-grafico-erros"
+                                    aria-label="Comparação de erros"></canvas>
+                        </div>
                     </article>
                 </div>
+
                 <article class="chart-card ex-spaced">
-                    <div class="ex-threshold-heading"><div><h2>Limiar do Random Forest</h2>
-                    <p>Selecione um limiar efetivamente testado; os resultados não são simulados.</p></div>
-                    <label class="ex-select-label" for="ex-limiar">Limiar <select id="ex-limiar" aria-label="Selecionar limiar do Random Forest"></select></label></div>
-                    <div class="ex-kpis" id="ex-kpis" aria-live="polite"></div>
-                    <div class="chart-container ex-threshold-chart"><canvas id="ex-grafico-limiares" aria-label="Precision, Recall e F1 por limiar"></canvas></div>
+                    <div class="ex-threshold-heading">
+                        <div>
+                            <h2>Limiar do Random Forest</h2>
+                            <p>
+                                Selecione um limiar efetivamente testado.
+                                Os resultados não são simulados.
+                            </p>
+                        </div>
+
+                        <label class="ex-select-label" for="ex-limiar">
+                            Limiar
+                            <select id="ex-limiar"
+                                    aria-label="Selecionar limiar"></select>
+                        </label>
+                    </div>
+
+                    <div id="ex-kpis" class="ex-kpis" aria-live="polite"></div>
+
+                    <div class="chart-container ex-threshold-chart">
+                        <canvas id="ex-grafico-limiares"
+                                aria-label="Métricas por limiar"></canvas>
+                    </div>
                 </article>
+
                 <div class="ex-grid ex-spaced">
-                    <article class="chart-card"><h2>Importância nas árvores</h2>
-                        <p>Top 10 por redução de impureza. Importância relativa, não causal.</p>
-                        <div class="chart-container ex-tall"><canvas id="ex-grafico-importancia" aria-label="Variáveis mais importantes nas árvores"></canvas></div>
+                    <article class="chart-card">
+                        <h2>Importância nas árvores</h2>
+                        <p>
+                            Top 10 por redução de impureza.
+                            Importância relativa, não causal.
+                        </p>
+
+                        <div class="chart-container ex-tall">
+                            <canvas id="ex-grafico-importancia"
+                                    aria-label="Importância das variáveis"></canvas>
+                        </div>
                     </article>
-                    <article class="chart-card"><h2>Importância por permutação</h2>
-                        <p>Queda média de AP (pontos percentuais), com duas permutações por variável.</p>
-                        <div class="chart-container ex-tall"><canvas id="ex-grafico-permutacao" aria-label="Importância por permutação"></canvas></div>
+
+                    <article class="chart-card">
+                        <h2>Importância por permutação</h2>
+                        <p>
+                            Queda média de Average Precision.
+                            Duas permutações por variável.
+                        </p>
+
+                        <div class="chart-container ex-tall">
+                            <canvas id="ex-grafico-permutacao"
+                                    aria-label="Importância por permutação"></canvas>
+                        </div>
                     </article>
                 </div>
-                <p class="model-disclaimer">Os modelos foram avaliados em dados de validação; o gráfico acima não substitui o resultado anterior da Regressão Logística no conjunto de teste. O limiar 0,95 da Regressão Logística foi selecionado usando a validação. A análise por permutação cobre apenas 10 variáveis e não determina causalidade ou significado das componentes PCA.</p>
+
+                <p class="model-disclaimer">
+                    Os modelos foram avaliados em dados de validação.
+                    A análise de permutação cobre dez variáveis
+                    e não comprova causalidade nem o significado
+                    das componentes PCA. O limiar da Regressão
+                    Logística foi selecionado usando a validação.
+                </p>
+            </div>
+
+            <div class="fa-note">
+                A rede neural MLP está planejada para a próxima
+                fase do projeto. Nenhuma métrica de rede neural
+                será exibida antes da execução e validação do experimento.
             </div>
         </section>
-        <!-- FIM EXPERIMENTOS ML -->
+
+        <!-- 6. QUALIDADE DOS DADOS -->
+        <section id="qualidade-dados" class="fa-page" hidden>
+            <header class="page-header">
+                <h1>Qualidade dos dados</h1>
+                <p>
+                    Verificação de consistência dos indicadores
+                    publicados e limitações do conjunto de dados.
+                </p>
+            </header>
+
+            <div class="fa-grid">
+                <article class="fa-card">
+                    <small>Registros informados</small>
+                    <strong id="qd-total">Carregando...</strong>
+                    <p>Total de transações no arquivo de indicadores.</p>
+                </article>
+
+                <article class="fa-card">
+                    <small>Consistência das classes</small>
+                    <strong id="qd-consistencia">Verificando...</strong>
+                    <p>Confere se legítimas mais fraudes correspondem ao total.</p>
+                </article>
+
+                <article class="fa-card">
+                    <small>Taxa de fraude</small>
+                    <strong id="qd-taxa">Verificando...</strong>
+                    <p>Compara a taxa publicada com a taxa recalculada.</p>
+                </article>
+            </div>
+
+            <article class="fa-panel">
+                <h2>Verificações disponíveis</h2>
+
+                <div class="fa-scroll">
+                    <table class="fa-table">
+                        <thead>
+                            <tr>
+                                <th>Verificação</th>
+                                <th>Resultado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Arquivo de indicadores acessível</td>
+                                <td id="qd-arquivo">Verificando...</td>
+                            </tr>
+                            <tr>
+                                <td>Contagens de classes consistentes</td>
+                                <td id="qd-classes">Verificando...</td>
+                            </tr>
+                            <tr>
+                                <td>Taxa de fraude coerente com as contagens</td>
+                                <td id="qd-percentual">Verificando...</td>
+                            </tr>
+                            <tr>
+                                <td>Validação de valores nulos na base bruta</td>
+                                <td>Não executada nesta página</td>
+                            </tr>
+                            <tr>
+                                <td>Verificação de duplicidades na base bruta</td>
+                                <td>Não executada nesta página</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </article>
+
+            <div class="fa-note">
+                Estas verificações são realizadas sobre o JSON
+                de indicadores agregados, não sobre as 284.807
+                linhas da base original. Uma auditoria completa
+                de dados exigirá execução de testes em Python
+                sobre o dataset bruto.
+            </div>
+        </section>
 
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.min.js"></script>
     <script src="js/app.js"></script>
     <script src="js/experimentos.js"></script>
+
+    <script>
+        "use strict";
+
+        // NAVEGACAO ENTRE ABAS
+        (function () {
+            const paginas = [...document.querySelectorAll(".fa-page")];
+            const links = [...document.querySelectorAll("[data-page]")];
+
+            function abrirPagina(id) {
+                const destino = paginas.find(pagina => pagina.id === id);
+                if (!destino) return;
+
+                paginas.forEach(pagina => {
+                    pagina.hidden = pagina !== destino;
+                });
+
+                links.forEach(link => {
+                    const ativa = link.dataset.page === id;
+                    link.classList.toggle("active", ativa);
+
+                    if (ativa) {
+                        link.setAttribute("aria-current", "page");
+                    } else {
+                        link.removeAttribute("aria-current");
+                    }
+                });
+
+                window.scrollTo({ top: 0, behavior: "instant" });
+
+                // Redimensiona graficos criados enquanto a aba estava oculta.
+                if (typeof Chart !== "undefined") {
+                    requestAnimationFrame(() => {
+                        Object.values(Chart.instances).forEach(grafico => {
+                            if (destino.contains(grafico.canvas)) {
+                                grafico.resize();
+                            }
+                        });
+                    });
+                }
+            }
+
+            links.forEach(link => {
+                link.addEventListener("click", () => {
+                    abrirPagina(link.dataset.page);
+                });
+            });
+
+            document.querySelectorAll("[data-go]").forEach(link => {
+                link.addEventListener("click", () => {
+                    abrirPagina(link.dataset.go);
+                });
+            });
+
+            window.addEventListener("hashchange", () => {
+                const id = decodeURIComponent(location.hash.slice(1));
+                abrirPagina(id);
+            });
+
+            const inicio = decodeURIComponent(location.hash.slice(1));
+            abrirPagina(inicio || "visao-geral");
+        })();
+
+        // INDICADORES DAS NOVAS ABAS
+        (async function () {
+            const numero = valor =>
+                new Intl.NumberFormat("pt-BR").format(valor);
+
+            const decimal = valor =>
+                new Intl.NumberFormat("pt-BR", {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                }).format(valor);
+
+            const percentual = valor => decimal(valor) + "%";
+
+            function preencher(id, valor) {
+                const elemento = document.getElementById(id);
+                if (elemento) elemento.textContent = valor;
+            }
+
+            try {
+                const resposta = await fetch("./data/indicadores.json", {
+                    cache: "no-store"
+                });
+
+                if (!resposta.ok) {
+                    throw new Error("HTTP " + resposta.status);
+                }
+
+                const d = await resposta.json();
+
+                const campos = [
+                    "total_transacoes",
+                    "total_legitimas",
+                    "total_fraudes",
+                    "taxa_fraude",
+                    "valor_medio_legitimas",
+                    "valor_medio_fraudes",
+                    "mediana_legitimas",
+                    "mediana_fraudes"
+                ];
+
+                if (campos.some(campo => !Number.isFinite(d[campo]))) {
+                    throw new Error("Indicadores obrigatorios invalidos");
+                }
+
+                if (
+                    !d.percentual_baixo_valor ||
+                    !Number.isFinite(d.percentual_baixo_valor.legitimas) ||
+                    !Number.isFinite(d.percentual_baixo_valor.fraudes)
+                ) {
+                    throw new Error("Indicadores de baixo valor invalidos");
+                }
+
+                const baixo = d.percentual_baixo_valor;
+
+                // Transacoes
+                preencher("tx-legitimas", numero(d.total_legitimas));
+                preencher("tx-media-legitimas", decimal(d.valor_medio_legitimas));
+                preencher("tx-media-fraudes", decimal(d.valor_medio_fraudes));
+                preencher("tx-tabela-media-legitimas", decimal(d.valor_medio_legitimas));
+                preencher("tx-tabela-media-fraudes", decimal(d.valor_medio_fraudes));
+                preencher("tx-mediana-legitimas", decimal(d.mediana_legitimas));
+                preencher("tx-mediana-fraudes", decimal(d.mediana_fraudes));
+                preencher("tx-baixo-legitimas", percentual(baixo.legitimas));
+                preencher("tx-baixo-fraudes", percentual(baixo.fraudes));
+
+                // Analise de risco
+                preencher("risco-baixo-fraudes", percentual(baixo.fraudes));
+                preencher("risco-baixo-legitimas", percentual(baixo.legitimas));
+
+                const diferenca = baixo.fraudes - baixo.legitimas;
+                preencher(
+                    "risco-diferenca",
+                    (diferenca > 0 ? "+" : "") + decimal(diferenca) + " p.p."
+                );
+
+                // Qualidade dos indicadores
+                preencher("qd-total", numero(d.total_transacoes));
+                preencher("qd-arquivo", "Carregado");
+
+                const classesOk =
+                    d.total_legitimas + d.total_fraudes === d.total_transacoes;
+
+                preencher("qd-consistencia", classesOk ? "OK" : "Divergente");
+                preencher("qd-classes", classesOk ? "Consistente" : "Divergente");
+
+                const taxaCalculada =
+                    d.total_transacoes > 0
+                    ? 100 * d.total_fraudes / d.total_transacoes
+                    : NaN;
+
+                const taxaOk =
+                    Number.isFinite(taxaCalculada) &&
+                    Math.abs(taxaCalculada - d.taxa_fraude) < 0.01;
+
+                preencher("qd-taxa", taxaOk ? "OK" : "Divergente");
+                preencher(
+                    "qd-percentual",
+                    taxaOk ? "Consistente" : "Divergente"
+                );
+
+            } catch (erro) {
+                console.error("Erro nos indicadores complementares:", erro);
+
+                [
+                    "tx-legitimas", "tx-media-legitimas", "tx-media-fraudes",
+                    "tx-tabela-media-legitimas", "tx-tabela-media-fraudes",
+                    "tx-mediana-legitimas", "tx-mediana-fraudes",
+                    "tx-baixo-legitimas", "tx-baixo-fraudes",
+                    "risco-baixo-fraudes", "risco-baixo-legitimas",
+                    "risco-diferenca", "qd-total", "qd-consistencia",
+                    "qd-taxa", "qd-arquivo", "qd-classes", "qd-percentual"
+                ].forEach(id => preencher(id, "Indisponível"));
+            }
+        })();
+    </script>
 
 </body>
 </html>
