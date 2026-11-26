@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Case de Negócio | Fraud Analytics</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/experimentos.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <h2>Fraud Analytics</h2>
+    <nav aria-label="Navegação principal">
+      <a href="index.html#visao-geral">Visão geral</a>
+      <a href="index.html#transacoes">Transações</a>
+      <a href="index.html#analise-risco">Análise de risco</a>
+      <a href="index.html#desempenho">Desempenho</a>
+      <a href="index.html#experimentos">Experimentos ML</a>
+      <a href="index.html#qualidade-dados">Qualidade dos dados</a>
+      <a href="case-de-negocio.html" class="active" aria-current="page">Case de negócio</a>
+    </nav>
+  </aside>
+  <main class="content">
+    <header class="page-header">
+      <h1>Case de negócio</h1>
+      <p>Da detecção de fraudes à decisão operacional: resultados, trade-offs e limitações dos experimentos.</p>
+    </header>
+
+    <div class="overview" aria-live="polite">
+      <article class="metric-card"><span>Transações na validação</span><strong id="case-total">Carregando...</strong></article>
+      <article class="metric-card"><span>Fraudes reais na validação</span><strong id="case-fraudes">Carregando...</strong></article>
+      <article class="metric-card"><span>Alertas falsos no Random Forest (limiar 0,50)</span><strong id="case-fp">Carregando...</strong></article>
+    </div>
+
+    <section class="model-section">
+      <header class="model-header">
+        <div><h2>01. O problema</h2><p>Fraudes são eventos raros; acertar a classe majoritária não basta.</p></div>
+        <span class="model-badge">Análise exploratória</span>
+      </header>
+      <article class="chart-card">
+        <h2>Qual decisão queremos apoiar?</h2>
+        <p>Um sistema de prevenção de fraudes precisa equilibrar duas consequências distintas: investigar transações legítimas por engano (falsos positivos) e não detectar transações fraudulentas (falsos negativos). A escolha de um modelo e de um limiar depende dos custos operacionais associados a cada erro.</p>
+        <p>Esta análise usa resultados de validação já produzidos pelo projeto. Não representa um sistema de monitoramento de transações em tempo real.</p>
+      </article>
+    </section>
+
+    <section class="model-section">
+      <header class="model-header">
+        <div><h2>02. Evidências e comparação</h2><p>Mesmo conjunto de validação; limiares diferentes para cada modelo.</p></div>
+        <span class="model-badge">Dados reais do experimento</span>
+      </header>
+      <article class="chart-card">
+        <h2>Regressão Logística V2 × Random Forest</h2>
+        <p>Os resultados abaixo são carregados do mesmo arquivo JSON utilizado no dashboard.</p>
+        <div style="overflow-x:auto">
+          <table style="width:100%;border-collapse:collapse;text-align:left;font-size:13px" id="case-tabela">
+            <thead><tr>
+              <th scope="col" style="padding:12px 8px;border-bottom:1px solid #e5eaf1">Indicador</th>
+              <th scope="col" style="padding:12px 8px;border-bottom:1px solid #e5eaf1">Regressão Logística V2</th>
+              <th scope="col" style="padding:12px 8px;border-bottom:1px solid #e5eaf1">Random Forest</th>
+            </tr></thead>
+            <tbody id="case-tabela-corpo"><tr><td colspan="3" style="padding:14px 8px">Carregando dados...</td></tr></tbody>
+          </table>
+        </div>
+      </article>
+      <div class="model-details">
+        <article class="chart-card">
+          <h2>O que mudou com o Random Forest?</h2>
+          <div class="model-results" aria-live="polite">
+            <div><span>Redução de falsos positivos</span><strong id="case-reducao">Carregando...</strong></div>
+            <div><span>Fraudes adicionais não detectadas</span><strong id="case-diferenca-fn">Carregando...</strong></div>
+          </div>
+          <p style="margin-top:18px">A redução de alertas indevidos veio acompanhada de uma redução na detecção de fraudes. Um resultado não deve ser descrito como superior em todos os aspectos.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="model-section">
+      <header class="model-header"><div><h2>03. Critério de decisão</h2><p>Como interpretar precisão, cobertura e custo operacional.</p></div></header>
+      <article class="chart-card">
+        <h2>Não existe um limiar universalmente melhor</h2>
+        <p>Um limiar mais restritivo tende a diminuir falsos alertas, mas também pode deixar de identificar fraudes. Para selecionar uma configuração seria necessário estimar, com dados da operação real, o custo de cada falso positivo e cada falso negativo, além da capacidade da equipe de investigação.</p>
+        <p>O laboratório do projeto permite experimentar cenários de custo <strong>hipotéticos</strong> com os nove limiares já avaliados do Random Forest.</p>
+        <a href="laboratorio-decisoes.html" class="model-badge" style="display:inline-block;text-decoration:none;margin-top:8px">Abrir Laboratório de Decisões</a>
+      </article>
+    </section>
+
+    <section class="model-section">
+      <header class="model-header"><div><h2>04. Método e limites</h2><p>O que este estudo permite — e não permite — concluir.</p></div></header>
+      <article class="chart-card">
+        <h2>Metodologia documentada</h2>
+        <p>Os dois modelos foram treinados em 170.883 registros e comparados sobre 56.962 registros de validação, incluindo 99 fraudes. A separação foi estratificada e reproduzível por semente fixa.</p>
+        <p><strong>Limitações relevantes:</strong> a validação é exploratória; o conjunto de teste já havia sido consultado em estudos anteriores; os limiares dos modelos são diferentes; as variáveis PCA não têm interpretação direta; e o conjunto de dados não representa necessariamente a distribuição de uma operação atual. Ainda são necessárias análises independentes antes de qualquer aplicação operacional.</p>
+        <p><a href="https://github.com/jouborges/tech-guide/blob/main/fraud-analytics/03_comparacao_modelos.py" target="_blank" rel="noopener noreferrer">Consultar o código de comparação</a> · <a href="https://github.com/jouborges/tech-guide/blob/main/fraud-analytics/docs/RELATORIO_MODELO.md" target="_blank" rel="noopener noreferrer">Relatório técnico</a> · <a href="https://github.com/jouborges/tech-guide/blob/main/fraud-analytics/docs/ROADMAP.md" target="_blank" rel="noopener noreferrer">Roadmap</a></p>
+      </article>
+      <p class="model-disclaimer">Case de portfólio com dados públicos e resultados experimentais. Custos financeiros simulados não correspondem a perdas observadas. Nenhuma informação individual de clientes é apresentada nesta página.</p>
+    </section>
+  </main>
+  <script>
+    'use strict';
+    (async function () {
+      const byId = id => document.getElementById(id);
+      const intFmt = n => new Intl.NumberFormat('pt-BR', {maximumFractionDigits:0}).format(n);
+      const pctFmt = n => new Intl.NumberFormat('pt-BR', {style:'percent',minimumFractionDigits:2,maximumFractionDigits:2}).format(n);
+      const fields = ['case-total','case-fraudes','case-fp','case-reducao','case-diferenca-fn'];
+      try {
+        const response = await fetch('./data/experimentos.json', {cache:'no-store'});
+        if (!response.ok) throw new Error('HTTP ' + response.status);
+        const data = await response.json();
+        if (!Array.isArray(data.modelos) || data.modelos.length !== 2) throw new Error('Modelos indisponíveis');
+        const logistica = data.modelos.find(m => /Logística/i.test(m.modelo));
+        const floresta = data.modelos.find(m => /Random Forest/i.test(m.modelo));
+        if (!logistica || !floresta) throw new Error('Modelos esperados não encontrados');
+        const values = ['Limiar','Precision','Recall','F1','AP','TP','FP','FN','TN'];
+        const numberKeys = ['Limiar','Precision','Recall','F1','AP'];
+        for (const m of [logistica,floresta]) {
+          if (values.some(k => !Number.isFinite(m[k]))) throw new Error('Indicadores incompletos');
+        }
+        if (!Number.isFinite(data.registros_validacao) || !Number.isFinite(data.fraudes_validacao)) throw new Error('Amostra inválida');
+        byId('case-total').textContent = intFmt(data.registros_validacao);
+        byId('case-fraudes').textContent = intFmt(data.fraudes_validacao);
+        byId('case-fp').textContent = intFmt(floresta.FP);
+        byId('case-reducao').textContent = pctFmt((logistica.FP - floresta.FP) / logistica.FP);
+        byId('case-diferenca-fn').textContent = intFmt(floresta.FN - logistica.FN);
+        const names = {Limiar:'Limiar',Precision:'Precision',Recall:'Recall',F1:'F1-score',AP:'Average Precision',TP:'Fraudes identificadas (TP)',FP:'Falsos positivos (FP)',FN:'Fraudes não detectadas (FN)',TN:'Legítimas corretamente classificadas (TN)'};
+        const body = byId('case-tabela-corpo');
+        body.replaceChildren();
+        for (const key of values) {
+          const row = document.createElement('tr');
+          for (const val of [names[key], numberKeys.includes(key) ? (key==='Limiar'?logistica[key].toFixed(2).replace('.',','):pctFmt(logistica[key])):intFmt(logistica[key]), numberKeys.includes(key) ? (key==='Limiar'?floresta[key].toFixed(2).replace('.',','):pctFmt(floresta[key])):intFmt(floresta[key])]) {
+            const td = document.createElement('td');
+            td.textContent = val;
+            td.style.padding = '12px 8px';
+            td.style.borderBottom = '1px solid #e5eaf1';
+            row.appendChild(td);
+          }
+          body.appendChild(row);
+        }
+      } catch (error) {
+        console.error('Falha ao carregar case:', error);
+        for (const id of fields) byId(id).textContent = 'Indisponível';
+        byId('case-tabela-corpo').textContent = 'Não foi possível carregar os resultados. Abra a página pelo servidor local e verifique os arquivos JSON.';
+      }
+    })();
+  </script>
+</body>
+</html>
